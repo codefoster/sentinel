@@ -3,7 +3,7 @@
 let Rx = require('rxjs/Rx')
 let utf8 = require('./util').utf8
 
-class BatchModule {
+class SentinelModule {
   create(broker, configuration) {
     this.broker = broker
     this.configuration = configuration
@@ -25,4 +25,4 @@ class BatchModule {
   }
 }
 
-module.exports = new BatchModule()
+module.exports = new SentinelModule()
