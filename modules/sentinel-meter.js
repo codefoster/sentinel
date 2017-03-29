@@ -12,10 +12,19 @@ class SentinelMeterModule {
     this.subscription = this.messages
         //add any interesting Rx operators here (i.e. .map, .filter)
       .subscribe(msg => {
-        
-        //add this modules unique logic
+        //build and send a sentinel message
+        let sentinelMessage = {
+          properties: {
+            source:'sentinel-meter',
+            type:'sentinel-message'
+          },
+          content: utf8.encode('TBD')
+        };
+        this.broker.publish(sentinelMessage);
 
-        this.broker.publish(msg)
+        //pass on the original message (may want to make this conditional)
+        this.broker.publish(msg);
+
       });
     return true;
   }
