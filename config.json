@@ -1,0 +1,116 @@
+{
+    "loaders": [
+        {
+            "type": "node",
+            "name": "node",
+            "configuration": {
+                "binding.path": "./bin/libnodejs_binding.so"
+            }
+        }
+    ],
+    "modules": [
+        {
+            "name": "simulated-device",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/simulated-device.js"
+                }
+            },
+            "args": null
+        },
+        {
+            "name": "api",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/api.js"
+                }
+            },
+            "args": null
+        },
+        {
+            "name": "batch",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/batch.js"
+                }
+            },
+            "args": {
+                "batch_time": 5000
+            }
+        },
+        {
+            "name": "filter",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/filter.js"
+                }
+            },
+            "args": {
+                "eda_min": "20",
+                "eda_max": "40"
+            }
+        },
+        {
+            "name": "printer",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/printer.js"
+                }
+            },
+            "args": null
+        },
+        {
+            "name": "logger",
+            "loader": {
+                "name": "native",
+                "entrypoint": {
+                    "module.path": "./bin/liblogger.so"
+                }
+            },
+            "args": {
+                "filename": "log.txt"
+            }
+        },
+        {
+            "name": "mapping",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/mapping.js"
+                }
+            },
+            "args": {
+                "deviceName": "gateway",
+                "deviceKey": "zgbBUYVXEoxyIRpdz4LjppMNmjrMe6vPV4rMYxmaNj0="
+            }
+        },
+        {
+            "name": "native-iothub",
+            "loader": {
+                "name": "native",
+                "entrypoint": {
+                    "module.path": "./bin/libiothub.so"
+                }
+            },
+            "args": {
+                "IoTHubName": "IoT-Hub-17minds",
+                "IoTHubSuffix": "azure-devices.net",
+                "Transport": "AMQP"
+            }
+        }
+    ],
+    "links": [
+        { "source": "*", "sink": "logger" },
+        { "source": "api", "sink": "filter" },
+        { "source": "simulated-device", "sink": "filter" },
+        { "source": "filter", "sink": "batch" },
+        { "source": "batch", "sink": "mapping" },
+        { "source": "mapping", "sink": "printer" },
+        { "source": "mapping", "sink": "native-iothub" }
+    ]
+}
