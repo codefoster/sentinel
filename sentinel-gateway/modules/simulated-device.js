@@ -14,13 +14,17 @@ module.exports = {
   },
 
   start: function () {
+    let devices = ['device00', 'device01', 'device02', 'device03'];
     this.intervalID = setInterval(() => {
       let content = {
-        eda: Math.floor(Math.random() * 40) + 10, //random 10-50
-        bvp: Math.floor(Math.random() * 20) + 50 //random 50-70
+        property1: Math.random(),
+        property2: Math.random()
       };
       this.broker.publish({
-        properties: { source: 'simulated-device' },
+        properties: {
+          source: 'simulated-device',
+          deviceId: devices[Math.floor(Math.random() * devices.length)]
+        },
         content: utf8.encode(content)
       });
     }, 500);
