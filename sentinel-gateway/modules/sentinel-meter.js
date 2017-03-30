@@ -16,10 +16,10 @@ class SentinelMeterModule {
           if (content.property1 < 0.15) {
             //build and send a sentinel message
             this.broker.publish({
-              properties: {
+              properties: Object.assign(msg.properties, {
                 source: 'sentinel-meter',
                 type: 'sentinel-message'
-              },
+              }),
               content: utf8.encode('TBD')
             });
           }
