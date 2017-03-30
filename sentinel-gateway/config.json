@@ -93,6 +93,7 @@
     "links": [
         { "source": "simulated-device", "sink": "mapping" },
         { "source": "mapping", "sink": "sentinel-meter" },
+        { "source": "sentinel-meter", "sink": "sentinel-analyzer" },
         { "source": "sentinel-meter", "sink": "printer" },
         { "source": "sentinel-meter", "sink": "native-iothub" }
     ]
