@@ -30,6 +30,18 @@
             "args": null
         },
         {
+            "name": "sentinel-sniffer",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/sentinel-sniffer.js"
+                }
+            },
+            "args": {
+                "filePath": "/home/pi/snort_logs/alert"
+            }
+        },
+        {
             "name": "printer",
             "loader": {
                 "name": "node",
@@ -48,6 +60,11 @@
                 }
             },
             "args": [
+                {
+                    "macAddress": "00:00:00:00:00:00",
+                    "deviceId": "gateway",
+                    "deviceKey": "zgbBUYVXEoxyIRpdz4LjppMNmjrMe6vPV4rMYxmaNj0="
+                },
                 {
                     "macAddress": "01:01:01:01:01:01",
                     "deviceId": "device01",
@@ -86,9 +103,13 @@
         }
     ],
     "links": [
-        { "source": "simulated-device", "sink": "sentinel-meter" },
-        { "source": "sentinel-meter", "sink": "mapping" },
-        { "source": "mapping", "sink": "printer" },
-        { "source": "mapping", "sink": "native-iothub" }
+        { "source": "simulated-device", "sink": "mapping" },
+        { "source": "mapping", "sink": "sentinel-meter" },
+        { "source": "mapping", "sink": "sentinel-sniffer" },
+        { "source": "sentinel-meter", "sink": "sentinel-analyzer" },
+        { "source": "sentinel-meter", "sink": "printer" },
+        { "source": "sentinel-meter", "sink": "native-iothub" },
+        { "source": "sentinel-sniffer", "sink": "printer" },
+        { "source": "sentinel-sniffer", "sink": "native-iothub" }
     ]
 }
