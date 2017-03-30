@@ -2,7 +2,6 @@
 
 let Rx = require('rxjs/Rx')
 let utf8 = require('./util').utf8
-let tokenbucket = require('./sentinel-tokenbucket');
 
 class SentinelAnalyzerModule {
   create(broker, configuration) {
