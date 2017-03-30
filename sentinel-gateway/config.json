@@ -91,9 +91,9 @@
         }
     ],
     "links": [
-        { "source": "simulated-device", "sink": "sentinel-meter" },
-        { "source": "sentinel-meter", "sink": "mapping" },
-        { "source": "mapping", "sink": "printer" },
-        { "source": "mapping", "sink": "native-iothub" }
+        { "source": "simulated-device", "sink": "mapping" },
+        { "source": "mapping", "sink": "sentinel-meter" },
+        { "source": "sentinel-meter", "sink": "printer" },
+        { "source": "sentinel-meter", "sink": "native-iothub" }
     ]
 }
