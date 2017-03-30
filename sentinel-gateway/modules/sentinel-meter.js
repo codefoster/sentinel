@@ -13,7 +13,7 @@ class SentinelMeterModule {
       .subscribe(devices => {
         devices.subscribe(msg => {
           let content = JSON.parse(utf8.decode(msg.content));
-          if (content.property1 < 0.1) {
+          if (content.property1 < 0.15) {
             //build and send a sentinel message
             this.broker.publish({
               properties: {
