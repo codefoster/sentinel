@@ -3,7 +3,7 @@
 let utf8 = require('./util').utf8
 let Tail = require('./tail').Tail;
 
-class SentinelTailModule {
+class SentinelSnifferModule {
   create(broker, configuration) {
     this.broker = broker
     this.configuration = configuration
@@ -11,7 +11,7 @@ class SentinelTailModule {
     this.tail.on('line', data => {
       let sentinelMessage = {
         properties: {
-          source:'sentinel-tail',
+          source:'sentinel-sniffer',
           logFile: this.configuration.filePath,
           type:'sentinel-message',
         },
@@ -23,7 +23,7 @@ class SentinelTailModule {
     });
 
     this.tail.on('error', err => {
-      console.log('sentinel-tail module failure: ' + err.toString());
+      console.log('sentinel-sniffer module failure: ' + err.toString());
     });
 
     tail.watch();
@@ -42,4 +42,4 @@ class SentinelTailModule {
   }
 }
 
-module.exports = new SentinelTailModule();
+module.exports = new SentinelSnifferModule();
