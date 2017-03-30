@@ -10,6 +10,7 @@ module.exports = {
   create: function (broker, configuration) {
     this.broker = broker;
     this.configuration = configuration;
+    this.i = 0;
     return true;
   },
 
@@ -18,7 +19,7 @@ module.exports = {
     this.intervalID = setInterval(() => {
       let content = {
         property1: Math.random(),
-        property2: Math.random()
+        property2: this.i++
       };
       this.broker.publish({
         properties: {
