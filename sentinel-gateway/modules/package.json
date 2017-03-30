@@ -9,6 +9,7 @@
     "azure-iot-device": "^1",
     "azure-iot-device-amqp": "^1",
     "restify": "^4",
-    "rxjs": "^5.1.0"
+    "rxjs": "^5.1.0",
+    "tail": "^1.2.1"
   }
 }
