@@ -15,7 +15,7 @@ module.exports = {
   },
 
   start: function () {
-    let devices = ['device00', 'device01', 'device02', 'device03'];
+    let devices = ['01:01:01:01:01:01', '01:01:01:01:01:02', '01:01:01:01:01:03', '01:01:01:01:01:04'];
     this.intervalID = setInterval(() => {
       let content = {
         property1: Math.random(),
@@ -24,7 +24,7 @@ module.exports = {
       this.broker.publish({
         properties: {
           source: 'simulated-device',
-          deviceId: devices[Math.floor(Math.random() * devices.length)]
+          macAddress: devices[Math.floor(Math.random() * devices.length)]
         },
         content: utf8.encode(content)
       });
