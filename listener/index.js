@@ -12,7 +12,7 @@ client.open(err => {
         exec('sudo kill -9 `pidof snort`');
         exec('rm -f /home/pi/snort_logs/alert');
         console.log('Starting snort drop'); 
-        exec('sudo snort -N -A full -d -D -l /home/pi/snort_logs -L test.log -s -c /etc/snort/rules/my_drop_rule.rules');
+        exec('sudo snort -N -d -D -l /home/pi/snort_logs -L test.log -s -c /etc/snort/rules/my_drop_rule.rules');
         client.complete(msg, () => console.log('Disconnecting device <--'));
     });
 

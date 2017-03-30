@@ -30,6 +30,27 @@
             "args": null
         },
         {
+            "name": "sentinel-analyzer",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/sentinel-analyzer.js"
+                }
+            }
+        },
+        {
+            "name": "sentinel-sniffer",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/sentinel-sniffer.js"
+                }
+            },
+            "args": {
+                "filePath": "/home/pi/snort_logs/alert"
+            }
+        },
+        {
             "name": "printer",
             "loader": {
                 "name": "node",
@@ -95,6 +116,7 @@
         { "source": "mapping", "sink": "sentinel-meter" },
         { "source": "sentinel-meter", "sink": "sentinel-analyzer" },
         { "source": "sentinel-meter", "sink": "printer" },
-        { "source": "sentinel-meter", "sink": "native-iothub" }
+        { "source": "sentinel-meter", "sink": "native-iothub" },
+        { "source": "sentinel-sniffer", "sink": "sentinel-analyzer" }
     ]
 }
