@@ -11,8 +11,7 @@ class SentinelAnalyzerModule {
     this.subscription = this.messages
       .filter(msg => msg.properties.type == 'sentinel-message')
       .subscribe(msg => {
-        //do something interesting here with sentinel messages
-        msg.properties.macAddress = "00:00:00:00:00:00"
+        msg.properties = Object.assign(msg.properties, { macAddress: "00:00:00:00:00:00"});
         this.broker.publish(msg)
       });
     return true;
