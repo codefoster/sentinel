@@ -47,10 +47,28 @@
                     "main.path": "./modules/mapping.js"
                 }
             },
-            "args": {
-                "deviceName": "gateway",
-                "deviceKey": "zgbBUYVXEoxyIRpdz4LjppMNmjrMe6vPV4rMYxmaNj0="
-            }
+            "args": [
+                {
+                    "macAddress": "01:01:01:01:01:01",
+                    "deviceId": "device01",
+                    "deviceKey": "iDKeG/NiWesjWmUSqxN9/f+sW8hjijSBzZylkTydfXs="
+                },
+                {
+                    "macAddress": "01:01:01:01:01:02",
+                    "deviceId": "device02",
+                    "deviceKey": "QJ/q7pryg2LMgHqvDhQHD/pvzIreb2/EOqD6RCR+QYg="
+                },
+                {
+                    "macAddress": "01:01:01:01:01:03",
+                    "deviceId": "device03",
+                    "deviceKey": "TYDDz4s/wj23UDnn1jtjb3ivH9d2Q1SUuD3XSXrm2FA="
+                },
+                {
+                    "macAddress": "01:01:01:01:01:04",
+                    "deviceId": "device04",
+                    "deviceKey": "4WtVoYidPS/081C/IA68C4pR2eGrr1J6Y0XknoQ9Xm0="
+                }
+            ]
         },
         {
             "name": "native-iothub",
@@ -61,7 +79,7 @@
                 }
             },
             "args": {
-                "IoTHubName": "IoT-Hub-17minds",
+                "IoTHubName": "sentinel-hack2017",
                 "IoTHubSuffix": "azure-devices.net",
                 "Transport": "AMQP"
             }
@@ -69,6 +87,8 @@
     ],
     "links": [
         { "source": "simulated-device", "sink": "sentinel-meter" },
-        { "source": "sentinel-meter", "sink": "printer" }
+        { "source": "sentinel-meter", "sink": "mapping" },
+        { "source": "mapping", "sink": "printer" },
+        { "source": "mapping", "sink": "native-iothub" }
     ]
 }
