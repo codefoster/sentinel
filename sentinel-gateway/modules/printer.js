@@ -13,9 +13,9 @@ module.exports = {
   },
 
   receive: function (message) {
-    console.log(`\nMESSAGE`)
-    console.log(`Header: ${JSON.stringify(message.properties)}`);
-    console.log(`Content: ${utf8.decode(message.content)}`)
+    console.log(message.properties.type == "sentinel-message" ? "\nSENTINEL MESSAGE" : "\nMESSAGE");
+      console.log(`Header: ${JSON.stringify(message.properties)}`);
+      console.log(`Content: ${utf8.decode(message.content)}`)
   },
 
   destroy: function () { }
