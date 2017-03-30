@@ -63,9 +63,9 @@
         {
             "name": "mapping",
             "loader": {
-                "name": "node",
+                "name": "native",
                 "entrypoint": {
-                    "main.path": "./modules/mapping.js"
+                    "module.path": "./bin/libidentity_map.so"
                 }
             },
             "args": [
