@@ -13,6 +13,7 @@ class SentinelSnifferModule {
         properties: {
           source:'sentinel-sniffer',
           logFile: this.configuration.filePath,
+          macAddress: '00:00:00:00:00:00',
           type:'sentinel-message',
         },
 

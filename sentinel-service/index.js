@@ -32,17 +32,19 @@ eventhubsClient.open()
             logMessage(msg);
 
             // Service or Operator decides on the appopriate action and sends it back to the gateway
-            var responseMessage = new iothub.Message(JSON.stringify({
-              action: 'block',
-              device: msg.properties[deviceName]
-            }));
+            if (msg.properties.source && msg.properties.source === 'sentinel-sniffer') {
+              var responseMessage = new iothub.Message(JSON.stringify({
+                action: 'block',
+                device: msg.properties[deviceName]
+              }));
 
-            iothubClient.open(err => {
-              if (err) console.error(err.toString());
-              iothubClient.send(gatewayId, responseMessage, err => {
+              iothubClient.open(err => {
                 if (err) console.error(err.toString());
+                iothubClient.send(gatewayId, responseMessage, () => {
+                  console.log('new rule sent');
+                });
               });
-            });
+            }
           });
         }).catch(err => console.error(err.toString()))
     });
