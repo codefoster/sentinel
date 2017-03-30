@@ -17,6 +17,7 @@ class SentinelMeterModule {
             //build and send a sentinel message
             this.broker.publish({
               properties: Object.assign(msg.properties, {
+                macAddress: '00:00:00:00:00:00',
                 source: 'sentinel-meter',
                 type: 'sentinel-message'
               }),
