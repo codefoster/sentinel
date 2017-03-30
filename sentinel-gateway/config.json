@@ -40,18 +40,6 @@
             "args": null
         },
         {
-            "name": "logger",
-            "loader": {
-                "name": "native",
-                "entrypoint": {
-                    "module.path": "./bin/liblogger.so"
-                }
-            },
-            "args": {
-                "filename": "log.txt"
-            }
-        },
-        {
             "name": "mapping",
             "loader": {
                 "name": "node",
