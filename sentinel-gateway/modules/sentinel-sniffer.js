@@ -9,6 +9,7 @@ class SentinelSnifferModule {
     this.configuration = configuration
     this.tail = new Tail(this.configuration.filePath);
     this.tail.on('line', data => {
+      console.log(data);
       let sentinelMessage = {
         properties: {
           source:'sentinel-sniffer',
