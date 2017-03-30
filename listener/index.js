@@ -5,20 +5,22 @@ var client = deviceAmqp.clientFromConnectionString(deviceConnectionString);
 
 var exec = require('child_process').execSync;
 
+// var receivedFile = '/home/pi/sentinel-gateway/listener/receive.txt';
 var received = false;
 
 client.open(err => {
     //handle C2D messages
     client.on('message', msg => {
-    if(!received){
-        console.log('Stopping snort');
-        exec('sudo kill -9 `pidof snort`');
-        exec('rm -f /home/pi/snort_logs/alert');
-        console.log('Starting snort drop'); 
-        exec('sudo snort -N -d -D -l /home/pi/snort_logs -L test.log -s -c /etc/snort/rules/my_drop_rule.rules');
-        client.complete(msg, () => console.log('Disconnecting device <--'));
-    	received = true;
-    }
+        // if (!fs.existsSync(receivedFile)) {
+            if (!received) {
+            console.log('Stopping snort');
+            exec('sudo kill -9 `pidof snort`');
+            exec('rm -f /home/pi/snort_logs/alert');
+            console.log('Starting snort drop');
+            exec('sudo snort -N -d -D -l /home/pi/snort_logs -L test.log -s -c /etc/snort/rules/my_drop_rule.rules');
+            client.complete(msg, () => console.log('Disconnecting device <--'));
+            received = true;
+        }
     });
 
     // send a D2C message repeatedly
