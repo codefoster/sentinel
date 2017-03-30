@@ -49,6 +49,11 @@
             },
             "args": [
                 {
+                    "macAddress": "00:00:00:00:00:00",
+                    "deviceId": "gateway",
+                    "deviceKey": "zgbBUYVXEoxyIRpdz4LjppMNmjrMe6vPV4rMYxmaNj0="
+                },
+                {
                     "macAddress": "01:01:01:01:01:01",
                     "deviceId": "device01",
                     "deviceKey": "iDKeG/NiWesjWmUSqxN9/f+sW8hjijSBzZylkTydfXs="
