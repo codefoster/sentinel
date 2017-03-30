@@ -38,7 +38,6 @@ class SentinelSnifferModule {
     if (!!this.tail) {
       this.tail.unwatch();
     }
-    this.subscription.unsubscribe()
   }
 }
 
