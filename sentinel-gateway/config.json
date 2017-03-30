@@ -20,39 +20,14 @@
             "args": null
         },
         {
-            "name": "api",
+            "name": "sentinel-meter",
             "loader": {
                 "name": "node",
                 "entrypoint": {
-                    "main.path": "./modules/api.js"
+                    "main.path": "./modules/sentinel-meter.js"
                 }
             },
             "args": null
-        },
-        {
-            "name": "batch",
-            "loader": {
-                "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/batch.js"
-                }
-            },
-            "args": {
-                "batch_time": 5000
-            }
-        },
-        {
-            "name": "filter",
-            "loader": {
-                "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/filter.js"
-                }
-            },
-            "args": {
-                "eda_min": "20",
-                "eda_max": "40"
-            }
         },
         {
             "name": "printer",
@@ -105,12 +80,7 @@
         }
     ],
     "links": [
-        { "source": "*", "sink": "logger" },
-        { "source": "api", "sink": "filter" },
-        { "source": "simulated-device", "sink": "filter" },
-        { "source": "filter", "sink": "batch" },
-        { "source": "batch", "sink": "mapping" },
-        { "source": "mapping", "sink": "printer" },
-        { "source": "mapping", "sink": "native-iothub" }
+        { "source": "simulated-device", "sink": "sentinel-meter" },
+        { "source": "sentinel-meter", "sink": "printer" }
     ]
 }
