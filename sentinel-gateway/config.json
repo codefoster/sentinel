@@ -30,6 +30,15 @@
             "args": null
         },
         {
+            "name": "sentinel-analyzer",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/sentinel-analyzer.js"
+                }
+            }
+        },
+        {
             "name": "sentinel-sniffer",
             "loader": {
                 "name": "node",
@@ -105,11 +114,9 @@
     "links": [
         { "source": "simulated-device", "sink": "mapping" },
         { "source": "mapping", "sink": "sentinel-meter" },
-        { "source": "mapping", "sink": "sentinel-sniffer" },
         { "source": "sentinel-meter", "sink": "sentinel-analyzer" },
         { "source": "sentinel-meter", "sink": "printer" },
         { "source": "sentinel-meter", "sink": "native-iothub" },
-        { "source": "sentinel-sniffer", "sink": "printer" },
-        { "source": "sentinel-sniffer", "sink": "native-iothub" }
+        { "source": "sentinel-sniffer", "sink": "sentinel-analyzer" }
     ]
 }

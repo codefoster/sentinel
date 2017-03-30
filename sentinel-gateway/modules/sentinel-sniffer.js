@@ -1,7 +1,7 @@
 'use strict'
 
 let utf8 = require('./util').utf8
-let Tail = require('./tail').Tail;
+let Tail = require('tail').Tail;
 
 class SentinelSnifferModule {
   create(broker, configuration) {
@@ -13,7 +13,6 @@ class SentinelSnifferModule {
         properties: {
           source:'sentinel-sniffer',
           logFile: this.configuration.filePath,
-          macAddress: '00:00:00:00:00:00',
           type:'sentinel-message',
         },
 
@@ -27,12 +26,11 @@ class SentinelSnifferModule {
       console.log('sentinel-sniffer module failure: ' + err.toString());
     });
 
-    tail.watch();
+    this.tail.watch();
     return true;
   }
 
   receive(msg) {
-    this.messages.next(msg)
   }
 
   destroy() {
